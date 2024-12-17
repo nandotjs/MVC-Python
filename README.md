@@ -5,4 +5,6 @@ MVC pattern in python
 - Controller: logic
 
 Use virtual enviroment
-Use Pylint
+Use Pylint and pre-commit
+Use SQLAlchemy to connect SQLite
+Make models
