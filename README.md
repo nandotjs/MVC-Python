@@ -5,3 +5,4 @@ MVC pattern in python
 - Controller: logic
 
 Use virtual enviroment
+Use Pylint
