@@ -1,6 +1,6 @@
 [MAIN]
 
-disable=C01103,C0114,C0115,C0116,C0103,W0703,C0209,E0015,C0411
+disable=C0114,C0115,C0116,C0103,W0703,C0209,E0015,C0411,C0303,C0301
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
@@ -322,7 +322,7 @@ max-returns=6
 max-statements=50
 
 # Minimum number of public methods for a class (see R0903).
-min-public-methods=2
+min-public-methods=0
 
 
 [EXCEPTIONS]
