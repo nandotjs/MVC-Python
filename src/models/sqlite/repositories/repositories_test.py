@@ -7,3 +7,9 @@ def test_list_all_pets():
     pets_repository = PetsRepository(db_connection)
     pets = pets_repository.list_all()
     assert len(pets) > 0
+
+def test_delete_pet():
+    pets_repository = PetsRepository(db_connection)
+    pets_repository.delete(1)
+    pets = pets_repository.list_all()
+    assert len(pets) == 4
