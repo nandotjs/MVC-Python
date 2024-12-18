@@ -1,14 +1,16 @@
-from mock_alchemy.mocking import AlchemyMagicMock
+from mock_alchemy.mocking import UnifiedAlchemyMagicMock
 from src.models.sqlite.entities.pets import Pets
 from src.models.sqlite.repositories.pets_repository import PetsRepository
 
 class MockConnection:
     def __init__(self) -> None:
-        self.session = AlchemyMagicMock()
-        self.session.query(Pets).all.return_value = [
+        self.session = UnifiedAlchemyMagicMock()
+        self.pets = [
             Pets(id=1, name="Dog"),
             Pets(id=2, name="Cat"),
         ]
+        self.session.query.return_value.all.return_value = self.pets
+        self.session.query.return_value.filter.return_value.one.return_value = self.pets[0]
     
     def __enter__(self):
         return self
@@ -22,3 +24,10 @@ def test_list_all_pets():
     pets = pets_repository.list_all()
     assert pets[0].id == 1
     assert pets[1].name == "Cat"
+
+def test_delete_pet_by_id():
+    mock_connection = MockConnection()
+    pets_repository = PetsRepository(mock_connection)
+    pets_repository.delete(1)
+    pets = pets_repository.list_all()
+    assert len(pets) == 1
