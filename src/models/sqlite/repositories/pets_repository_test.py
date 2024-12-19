@@ -1,16 +1,21 @@
+from unittest import mock
 from mock_alchemy.mocking import UnifiedAlchemyMagicMock
 from src.models.sqlite.entities.pets import Pets
 from src.models.sqlite.repositories.pets_repository import PetsRepository
 
 class MockConnection:
     def __init__(self) -> None:
-        self.session = UnifiedAlchemyMagicMock()
-        self.pets = [
-            Pets(id=1, name="Dog"),
-            Pets(id=2, name="Cat"),
-        ]
-        self.session.query.return_value.all.return_value = self.pets
-        self.session.query.return_value.filter.return_value.one.return_value = self.pets[0]
+        self.session = UnifiedAlchemyMagicMock(
+            data=[
+                (
+                    [mock.call.query(Pets)],
+                    [
+                        Pets(id=1, name="Dog"), 
+                        Pets(id=2, name="Cat")
+                    ]
+                )
+            ]
+        )
     
     def __enter__(self):
         return self
