@@ -1,8 +1,9 @@
 from src.models.sqlite.entities.owners import Owners
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.pets import Pets
+from src.models.sqlite.interfaces.owners_repository import OwnersRepositoryInterface
 
-class OwnersRepository:
+class OwnersRepository(OwnersRepositoryInterface):
     def __init__(self, db_connection):
         self.db_connection = db_connection
 
