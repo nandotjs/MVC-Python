@@ -26,3 +26,9 @@ def test_create_owner():
     owners_repository = OwnersRepository(db_connection)
     owners_repository.create(first_name, last_name, age, pet_id)
 
+@pytest.mark.skip(reason="DB integration test")
+def test_get_owner_by_id():
+    idd = 1
+    owners_repository = OwnersRepository(db_connection)
+    owners_repository.get_owner_by_id(idd)
+
