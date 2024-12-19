@@ -5,16 +5,6 @@ class PetsRepository:
     def __init__(self, db_connection):
         self.db_connection = db_connection
 
-    def create(self, pet: Pets) -> Pets:
-        with self.db_connection as database:
-            try:
-                database.session.add(pet)
-                database.session.commit()
-                return pet
-            except Exception as e:
-                database.session.rollback()
-                raise e
-
     def list_all(self) -> list:
         with self.db_connection as database:
             try:
