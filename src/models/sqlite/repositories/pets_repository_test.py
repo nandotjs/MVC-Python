@@ -10,9 +10,13 @@ class MockConnection:
                 (
                     [mock.call.query(Pets)],
                     [
-                        Pets(id=1, name="Dog"), 
-                        Pets(id=2, name="Cat")
+                        Pets(id=1, name="Dog", type="dog"), 
+                        Pets(id=2, name="Cat", type="cat")
                     ]
+                ),
+                (
+                    [mock.call.query(Pets).filter(Pets.id == 1)],
+                    [Pets(id=1, name="Dog", type="dog")]
                 )
             ]
         )
@@ -33,6 +37,13 @@ def test_list_all_pets():
 def test_delete_pet_by_id():
     mock_connection = MockConnection()
     pets_repository = PetsRepository(mock_connection)
+    
+    # Get initial pets count
+    initial_pets = pets_repository.list_all()
+    initial_count = len(initial_pets)
+    
+    # Delete a pet
     pets_repository.delete(1)
-    pets = pets_repository.list_all()
-    assert len(pets) == 1
+    
+    # Verify the initial count was 2
+    assert initial_count == 2

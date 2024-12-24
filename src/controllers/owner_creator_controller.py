@@ -12,22 +12,22 @@ class OwnerCreatorController:
         pet_id = owner_info["pet_id"]
 
         self.__validate_names(first_name, last_name)
-        self.__insert_owner(first_name, last_name, age, pet_id)
-        return self.__format_response(owner_info)
+        owner_id = self.__insert_owner(first_name, last_name, age, pet_id)
+        return self.__format_response(owner_info, owner_id)
 
     def __validate_names(self, first_name: str, last_name: str) -> None:
         non_valid_caracters = re.compile(r'[^a-zA-Z]')
         if non_valid_caracters.search(first_name) or non_valid_caracters.search(last_name):
             raise ValueError("First name and last name must contain only letters")
 
-    def __insert_owner(self, first_name: str, last_name: str, age: int, pet_id: int) -> None:
-        self.owners_repository.create(first_name, last_name, age, pet_id)
+    def __insert_owner(self, first_name: str, last_name: str, age: int, pet_id: int) -> int:
+        return self.owners_repository.create(first_name, last_name, age, pet_id)
 
-    def __format_response(self, owner_info: dict) -> dict:
+    def __format_response(self, owner_info: dict, owner_id: int) -> dict:
         return {
             "data": {
                 "type": "owner",
-                "id": owner_info["id"],
+                "id": owner_id,
                 "attributes": owner_info
             }
         }

@@ -16,4 +16,9 @@ def test_owner_finder_controller():
     owner_finder_controller = OwnerFinderController(MockOwnersRepository())
     response = owner_finder_controller.find(1)
     assert response["data"]["id"] == 1
-    assert response["data"]["attributes"] == {"id": 1, "first_name": "John", "last_name": "Doe", "age": 30, "pet_id": 1}
+    assert response["data"]["attributes"] == {
+        "first_name": "John",
+        "last_name": "Doe",
+        "age": 30,
+        "pet_id": 1
+    }
