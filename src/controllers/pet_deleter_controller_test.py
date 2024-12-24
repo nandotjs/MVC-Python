@@ -25,7 +25,7 @@ def test_pet_deleter_controller_success():
 
 def test_pet_deleter_controller_error():
     class FailingMockRepository(MockPetsRepository):
-        def delete(self, pet_id: int) -> None:
+        def delete(self, pet_id: int) -> None: # pylint: disable=arguments-differ
             raise Exception("Database error")
 
     mock_repository = FailingMockRepository()

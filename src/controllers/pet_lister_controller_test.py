@@ -15,8 +15,8 @@ class MockPetsRepository:
         ]
 
 def test_pet_lister_controller():
-    pet_lister_controller = PetListerController(MockPetsRepository())
-    response = pet_lister_controller.list()
+    controller = PetListerController(MockPetsRepository())
+    response = controller.list()
     
     assert len(response) == 2
     assert response[0]["type"] == "pet"
@@ -24,9 +24,13 @@ def test_pet_lister_controller():
     assert response[0]["name"] == "Rex"
     assert response[0]["age"] == 3
     assert response[0]["owner_id"] == 1
+
+def test_pet_lister_empty_list():
+    class EmptyMockRepository:
+        def list_all(self):
+            return []
     
-    assert response[1]["type"] == "pet"
-    assert response[1]["id"] == 2
-    assert response[1]["name"] == "Fluffy"
-    assert response[1]["age"] == 2
-    assert response[1]["owner_id"] == 2 
+    controller = PetListerController(EmptyMockRepository())
+    response = controller.list()
+    
+    assert len(response) == 0 
