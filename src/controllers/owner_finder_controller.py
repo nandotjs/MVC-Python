@@ -1,11 +1,13 @@
+from typing import Dict
 from src.models.sqlite.interfaces.owners_repository import OwnersRepositoryInterface
 from src.models.sqlite.entities.owners import Owners
+from src.controllers.interfaces.owner_finder_controller_interface import OwnerFinderControllerInterface
 
-class OwnerFinderController:
+class OwnerFinderController(OwnerFinderControllerInterface):
     def __init__(self, owners_repository: OwnersRepositoryInterface):
         self.owners_repository = owners_repository
 
-    def find(self, owner_id: int) -> dict:
+    def find(self, owner_id: int) -> Dict:
         owner = self.__find_owner_in_db(owner_id)
         return self.__format_response(owner)
 

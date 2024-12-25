@@ -1,12 +1,13 @@
-from typing import List
+from typing import List, Dict
 from src.models.sqlite.interfaces.pets_repository import PetsRepositoryInterface
 from src.models.sqlite.entities.pets import Pets
+from src.controllers.interfaces.pet_lister_controller_interface import PetListerControllerInterface
 
-class PetListerController:
+class PetListerController(PetListerControllerInterface):
     def __init__(self, pets_repository: PetsRepositoryInterface):
         self.pets_repository = pets_repository
 
-    def list(self) -> dict:
+    def list(self) -> List[Dict]:
         pets = self.__get_pets_from_db()
         return self.__format_response(pets)
 

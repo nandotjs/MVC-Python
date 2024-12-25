@@ -1,7 +1,8 @@
 from src.models.sqlite.interfaces.owners_repository import OwnersRepositoryInterface
+from src.controllers.interfaces.owner_creator_controller_interface import OwnerCreatorControllerInterface
 import re
 
-class OwnerCreatorController:
+class OwnerCreatorController(OwnerCreatorControllerInterface):
     def __init__(self, owners_repository: OwnersRepositoryInterface):
         self.owners_repository = owners_repository
 
