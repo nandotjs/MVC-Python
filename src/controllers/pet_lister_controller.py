@@ -23,8 +23,6 @@ class PetListerController(PetListerControllerInterface):
                 "type": "pet",
                 "id": pet.id,
                 "name": pet.name,
-                "age": pet.age,
-                "owner_id": pet.owner_id
             })
         return formatted_pets
     
