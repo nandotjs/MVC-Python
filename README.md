@@ -7,4 +7,5 @@ MVC pattern in python
 Use virtual enviroment
 Use Pylint and pre-commit
 Use SQLAlchemy to connect SQLite
-Make models
+Make models (entities, repositories and interfaces)
+Make controllers (test and interfaces)
