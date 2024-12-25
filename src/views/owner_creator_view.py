@@ -9,5 +9,5 @@ class OwnerCreatorView(ViewInterface):
 
     def render(self, http_request: HttpRequest) -> HttpResponse:
         owner_info = self.owner_creator_controller.create(http_request.body)
-        return HttpResponse(200, owner_info)
+        return HttpResponse(201, owner_info)
 
