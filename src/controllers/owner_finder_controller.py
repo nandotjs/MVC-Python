@@ -26,7 +26,11 @@ class OwnerFinderController(OwnerFinderControllerInterface):
                     "first_name": owner.first_name,
                     "last_name": owner.last_name,
                     "age": owner.age,
-                    "pet_id": owner.pet_id
+                    "pet_id": owner.pet_id,
+                    "pet": {
+                        "name": owner.pet_name,
+                        "type": owner.pet_type
+                    } if owner.pet_name else None
                 }
             }
         }

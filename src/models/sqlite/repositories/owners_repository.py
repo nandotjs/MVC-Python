@@ -26,8 +26,11 @@ class OwnersRepository(OwnersRepositoryInterface):
                         .outerjoin(Pets, Pets.id == Owners.pet_id)
                         .filter(Owners.id == id)
                         .with_entities(
+                            Owners.id,
                             Owners.first_name,
                             Owners.last_name,
+                            Owners.age,
+                            Owners.pet_id,
                             Pets.name.label("pet_name"),
                             Pets.type.label("pet_type")
                         ) 
