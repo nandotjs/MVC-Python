@@ -2,6 +2,7 @@ from typing import Dict
 from src.models.sqlite.interfaces.owners_repository import OwnersRepositoryInterface
 from src.models.sqlite.entities.owners import Owners
 from src.controllers.interfaces.owner_finder_controller_interface import OwnerFinderControllerInterface
+from src.errors.error_types.http_not_found import HttpNotFoundError
 
 class OwnerFinderController(OwnerFinderControllerInterface):
     def __init__(self, owners_repository: OwnersRepositoryInterface):
@@ -14,7 +15,7 @@ class OwnerFinderController(OwnerFinderControllerInterface):
     def __find_owner_in_db(self, owner_id: int) -> Owners:
         owner = self.owners_repository.get_owner_by_id(owner_id)
         if not owner:
-            raise ValueError("Owner not found")
+            raise HttpNotFoundError("Owner not found")
         return owner
 
     def __format_response(self, owner: Owners) -> dict:

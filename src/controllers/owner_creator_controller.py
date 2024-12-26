@@ -1,5 +1,6 @@
 from src.models.sqlite.interfaces.owners_repository import OwnersRepositoryInterface
 from src.controllers.interfaces.owner_creator_controller_interface import OwnerCreatorControllerInterface
+from src.errors.error_types.http_unprocessable_entity import HttpUnprocessableEntityError
 import re
 
 class OwnerCreatorController(OwnerCreatorControllerInterface):
@@ -19,7 +20,7 @@ class OwnerCreatorController(OwnerCreatorControllerInterface):
     def __validate_names(self, first_name: str, last_name: str) -> None:
         non_valid_caracters = re.compile(r'[^a-zA-Z]')
         if non_valid_caracters.search(first_name) or non_valid_caracters.search(last_name):
-            raise ValueError("First name and last name must contain only letters")
+            raise HttpUnprocessableEntityError("First name and last name must contain only letters")
 
     def __insert_owner(self, first_name: str, last_name: str, age: int, pet_id: int) -> int:
         return self.owners_repository.create(first_name, last_name, age, pet_id)
