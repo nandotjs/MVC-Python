@@ -23,6 +23,7 @@ class PetListerController(PetListerControllerInterface):
                 "type": "pet",
                 "id": pet.id,
                 "name": pet.name,
+                "age": pet.age if hasattr(pet, 'age') else None,
             })
         return formatted_pets
     

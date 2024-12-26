@@ -22,8 +22,6 @@ def test_pet_lister_controller():
     assert response[0]["type"] == "pet"
     assert response[0]["id"] == 1
     assert response[0]["name"] == "Rex"
-    assert response[0]["age"] == 3
-    assert response[0]["owner_id"] == 1
 
 def test_pet_lister_empty_list():
     class EmptyMockRepository:

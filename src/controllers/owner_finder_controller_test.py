@@ -1,5 +1,6 @@
 from src.controllers.owner_finder_controller import OwnerFinderController
 import pytest
+from src.errors.error_types.http_not_found import HttpNotFoundError
 
 class MockOwner:
     def __init__(self, id: int, first_name: str, last_name: str, age: int, pet_id: int): # pylint: disable=too-many-arguments 
@@ -8,6 +9,8 @@ class MockOwner:
         self.last_name = last_name
         self.age = age
         self.pet_id = pet_id
+        self.pet_name = None
+        self.pet_type = None
 
 class MockOwnersRepository:
     def get_owner_by_id(self, owner_id: int):
@@ -24,10 +27,11 @@ def test_owner_finder_controller_success():
         "first_name": "John",
         "last_name": "Doe",
         "age": 30,
-        "pet_id": 1
+        "pet_id": 1,
+        "pet": None
     }
 
 def test_owner_finder_controller_not_found():
     owner_finder_controller = OwnerFinderController(MockOwnersRepository())
-    with pytest.raises(ValueError, match="Owner not found"):
+    with pytest.raises(HttpNotFoundError, match="Owner not found"):
         owner_finder_controller.find(999)
