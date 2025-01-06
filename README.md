@@ -27,3 +27,7 @@
    - server config
    - routes
    - composers
+
+5. Make error handlers
+
+6. Deploy
